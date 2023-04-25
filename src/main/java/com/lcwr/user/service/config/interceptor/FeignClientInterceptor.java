@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 public class FeignClientInterceptor implements RequestInterceptor {
 
 
+    @Autowired
     private OAuth2AuthorizedClientManager manager;
     @Override
     public void apply(RequestTemplate requestTemplate) {
