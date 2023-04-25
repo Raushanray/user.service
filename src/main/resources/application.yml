@@ -3,11 +3,29 @@ server:
 
 spring:
   application:
-   name: USER-SERVICE
+    name: USER-SERVICE
   config:
     import: optional:configserver:http://localhost:8085
-#  profiles:    (this is create only for testing prupose line profiles:active )
-#    active: prod
+  #  profiles:    (this is create only for testing prupose line profiles:active )
+  #    active: prod
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-28295594.okta.com/oauth2/default
+      client:
+        registration:
+          my-internal-client:
+            provider: okta
+            authorization-grant-type: client_credentials
+            scope: internal
+            client-id: 0oa98byqz65KTkuX05d7
+            client-secret: SaQaaMB2FV5JWqxZTyP3GJOr4ZDfHnT0bavtZxfL
+
+        provider:
+          okta:
+            issuer-uri: https://dev-28295594.okta.com/oauth2/default
+
 
   datasource:
     url: jdbc:mysql://localhost:3306/microservices
@@ -72,3 +90,9 @@ resilience4j:
         limit-refresh-period: 4s
         limit-for-period: 2
         timeout-duration: 2s
+
+
+okta:
+  oauth2:
+    issuer: https://dev-28295594.okta.com/oauth2/default
+    audience: api://default
